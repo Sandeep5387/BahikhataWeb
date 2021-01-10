@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "BahikhataWeb"
+  "defaultProject": "BahikhataWeb",
+  "cli": {
+    "analytics": false
+  }
 }
