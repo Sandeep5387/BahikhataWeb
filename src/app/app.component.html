@@ -1,8 +1,208 @@
-<h2>Bahikhata Web</h2>
-<mat-card>
-  <mat-card-content>
-    <app-register></app-register>
- </mat-card-content>
-</mat-card>
 
+<div class="Header">
+  <div id="Heading">
+    <h3 class="logo">bahi<span>khata</span></h3>
+  </div>
+  <div id="HeaderLinks">
+    <p id="Customers">
+      <a href="url">Customers</a>
+    </p>
+
+    <p id="Products">
+      <a href="url">Products</a>
+    </p>
+
+    <p id="Settings">
+      <a href="url">Settings</a>
+    </p>
+    <p id="Logout">
+      <a href="url">
+        <mat-icon aria-hidden="false" aria-label="Example home icon"
+          >power_settings_new</mat-icon
+        >
+      </a>
+    </p>
+  </div>
+</div>
+
+<div id="addTransaction">
+  <span>Add a Transaction</span>
+</div>
+<div id="transaction">
+  <div id="transactionLeft">
+    <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+      <div id="transactionLeft1">
+        <mat-form-field id="CustomerName" appearance="outline" color="accent">
+          <mat-label>Customer Name</mat-label>
+          <input
+            name="Cust_name"
+            #Cust_name="ngModel"
+            [(ngModel)]="apiService.formData.CustomerName"
+            matInput
+            placeholder="Placeholder"
+          />
+        </mat-form-field>
+
+        <mat-form-field id="mob_num" appearance="outline" color="accent">
+          <mat-label>Mobile Number</mat-label>
+          <input
+            name="Mob_Num"
+            #Mob_Num="ngModel"
+            [(ngModel)]="apiService.formData.MobileNumber"
+            matInput
+            placeholder="Placeholder"
+          />
+        </mat-form-field>
+      </div>
+      <div class="transactionLeft2">
+        <mat-form-field
+          id="Prdct"
+          class="rapp"
+          appearance="outline"
+          color="accent"
+          width="93px"
+        >
+          <mat-label>Product</mat-label>
+          <input
+            name="Product"
+            #Product="ngModel"
+            [(ngModel)]="apiService.formData.ProductName"
+            matInput
+            placeholder="Placeholder"
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          id="Price"
+          class="trans"
+          appearance="outline"
+          color="accent"
+        >
+          <mat-label>Price</mat-label>
+          <input
+            name="Price"
+            #Price="ngModel"
+            [(ngModel)]="apiService.formData.Price"
+            matInput
+            placeholder="Placeholder"
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          id="QNT"
+          class="trans"
+          appearance="outline"
+          color="accent"
+        >
+          <mat-label>Quantity</mat-label>
+          <input
+            name="Quantity"
+            #Quantity="ngModel"
+            [(ngModel)]="apiService.formData.Quantity"
+            matInput
+            placeholder="Placeholder"
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          id="AMT"
+          class="trans"
+          appearance="outline"
+          color="accent"
+        >
+          <mat-label>Amount</mat-label>
+          <input
+            name="Amount"
+            #Amount="ngModel"
+            [(ngModel)]="apiService.formData.Amount"
+            matInput
+            placeholder="Placeholder"
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          id="GST"
+          class="trans"
+          appearance="outline"
+          color="accent"
+        >
+          <mat-label>GST</mat-label>
+          <input
+            name="GST"
+            #GST="ngModel"
+            [(ngModel)]="apiService.formData.GST"
+            matInput
+            placeholder="Placeholder"
+          />
+        </mat-form-field>
+
+        <button mat-button class="trans" id="addItem">
+          <mat-icon>add_circle_outline</mat-icon>
+        </button>
+      </div>
+      <div class="transactionLeft3">
+        <mat-form-field
+          id="DATE"
+          class="rapp"
+          appearance="outline"
+          color="accent"
+        >
+          <mat-label>Date</mat-label>
+          <input
+            name="Date"
+            #Date="ngModel"
+            [(ngModel)]="apiService.formData.Date"
+            matInput
+            placeholder="Placeholder"
+            [matDatepicker]="picker"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-checkbox class="paid trans">paid</mat-checkbox>
+      </div>
+    </form>
+    <div class="submit">
+      <button mat-raised-button class="trans" id="Add" color="accent">
+        Add
+      </button>
+
+      <button mat-raised-button class="trans" id="Reset" color="warn">
+        Reset
+      </button>
+    </div>
+  </div>
+  <div id="transactionRight" class="tnsctn"></div>
+</div>
+<div>
+  <h2>USER DATA IS</h2>
+
+  <table>
+    <tr>
+      <th>CustomerName</th>
+      <th>Quantity</th>
+      <th>MobileNumber</th>
+      <th>ProductName</th>
+      <th>Price</th>
+      <th>Amount</th>
+      <th>Date</th>
+      <th>GST</th>
+     
+    </tr>
+
+    <tr *ngFor="let com of lstposts">
+      <td>{{ com.CustomerName }}</td>
+      <td>{{ com.Quantity }}</td>
+      <td>{{ com.MobileNumber }}</td>
+      <td>{{ com.ProductName }}</td>
+      <td>{{ com.Price }}</td>
+      <td>{{ com.Amount }}</td>
+      <td>{{ com.Date }}</td>
+      <td>{{ com.GST }}</td>
+  </table>
+</div>
 
