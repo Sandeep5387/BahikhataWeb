@@ -1,0 +1,148 @@
+@import '../scss/variables';
+
+.Header {
+  flex: 1 1 auto;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  flex-direction: row;
+  height: 80px;
+
+  /* white */
+
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#HeaderLinks {
+  flex: 1 1 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: right;
+  text-align: center;
+  flex-direction: column;
+  
+  width: 30px;
+  height: 21px;
+  margin-left: 600px;
+  margin-top: 30px;
+  line-height: 21px;
+  /* identical to box height */
+  align-items: center;
+
+  color: #000000;
+}
+#Heading {
+  
+  margin-left: 48px;
+  margin-top: 20px;
+
+  font-family: Comfortaa;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 40px;
+  display: flex;
+  align-items: center;
+
+  color: #c7cecf;
+}
+
+
+#Logout {
+  /* Red */
+  text-decoration: none;
+       
+}
+#transaction
+{
+  display: flex;
+}
+#transactionLeft1 {
+  
+  /* white */
+margin-top: 20px;
+margin-left: 47px;
+  background: #ffffff;
+  /* Blue 1 */
+  
+  border-radius: 6px;
+  
+  
+}
+
+#addTransaction {
+  /* Rectangle 11 */
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  
+  /* identical to box height */
+
+  display: flex;
+
+  align-items: center;
+
+  /* white */
+
+  color: #ffffff;
+
+  
+  width: 94%;
+  height: 40px;
+  margin-left: 47px;
+  margin-top: 15px;
+
+  background: linear-gradient(90deg, #087e8b 0%, #108cc0 65.63%, #1494dc 100%);
+}
+.logo
+{
+  font-family: "Comfortaa";
+  color: $primary;
+  font-size: 36px;
+  text-transform: capitalize;
+  width: 194px;
+height: 40px;
+
+  span
+  {
+    color: $accent;
+  }
+}
+
+#mob_num
+{
+  margin-left: 35px;
+  width: 20%;
+}
+.rapp
+{
+  
+  width: 180px;
+  margin-left: 47px;
+}
+
+.trans
+{
+  width: 80px;
+  margin-left: 15px;
+}
+.CustomerName
+{
+  width: 100%;
+}
+
+#addItem
+{
+  background:$primary;
+  /* Blue 1 */
+  width: 5%;
+  border-radius: 6px;
+}
+.submit
+{ 
+  margin-left: 30px;
+}
+
+
