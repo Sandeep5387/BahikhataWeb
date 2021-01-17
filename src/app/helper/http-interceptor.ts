@@ -8,7 +8,7 @@ export class ApplicationHttpInterceptor implements HttpInterceptor {
     const authReq = httpRequest.clone({
         headers: new HttpHeaders({
           'Content-Type':  'application/json',
-          'Authorization': 'my-auth-token',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjkxNzkxNDk4OTciLCJuYW1laWQiOiI2MDA0MmFmZDQxMWQ5ZWMzYWE3NzU1MjYiLCJuYmYiOjE2MTA4ODU5MTEsImV4cCI6MTYxMDg4OTUxMSwiaWF0IjoxNjEwODg1OTExfQ.fj2jmFw2rdjwPaKu-vzDVvav4r3TiFwXhJyBEjUyBCg',
           'device':'1'
         })
       });

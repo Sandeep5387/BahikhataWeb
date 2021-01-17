@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiurl:"https://localhost:5001/api"
+  apiurl:"https://bahikhataapi20210117155701.azurewebsites.net"
 };
 
 /*

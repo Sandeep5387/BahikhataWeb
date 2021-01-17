@@ -163,18 +163,21 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
-        <mat-checkbox class="paid trans">paid</mat-checkbox>
+        <mat-checkbox class="paid trans"  name=paid #paid="ngModel" [(ngModel)]="apiService.formData.paid">paid</mat-checkbox>
+        
+      
       </div>
-    </form>
+    
     <div class="submit">
-      <button mat-raised-button class="trans" id="Add" color="accent">
+      <button type="submit" mat-raised-button class="trans" id="Add" color="accent">
         Add
       </button>
 
-      <button mat-raised-button class="trans" id="Reset" color="warn">
+      <button type="reset" mat-raised-button class="trans" id="Reset" color="warn">
         Reset
       </button>
     </div>
+  </form>
   </div>
   <div id="transactionRight" class="tnsctn"></div>
 </div>

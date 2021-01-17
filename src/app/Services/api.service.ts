@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs'
 import {HttpClient,HttpParams} from'@angular/common/http';
 import { Comments } from '../Classes/comments';
+import { HttpClientService } from '../helper/services/http-client.service';
 
 @Injectable(
     {
@@ -10,9 +11,9 @@ import { Comments } from '../Classes/comments';
 )
  export  class api
 {
-
+    
     formData: Comments=new Comments();
-    constructor(private httpClient:HttpClient){}
+    constructor(private httpClient:HttpClientService){}
     // getComments():Observable<any>
     // {
     //     return this.httpClient.get("https://jsonplaceholder.typicode.com/posts/1/comments")
@@ -25,10 +26,16 @@ import { Comments } from '../Classes/comments';
 
     //     return this.httpClient.get("https://jsonplaceholder.typicode.com/posts",{params:param1})
 
+    
+
     // }
 
     addTransaction(formData:Comments):Observable<any>
     {
-        return this.httpClient.post('http://localhost:4200/url',formData)
+        //return this.httpClient.post("192.168.43.202/44307",)
+        return new Observable<any>();
     }
+
+    
+
 }

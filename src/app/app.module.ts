@@ -13,6 +13,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { ApplicationHttpInterceptor } from './helper/http-interceptor';
+import { api } from './Services/api.service';
+import {HttpClientService} from './helper/services/http-client.service'
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: 
@@ -24,33 +31,6 @@ import { ApplicationHttpInterceptor } from './helper/http-interceptor';
   imports: 
   [
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatIconModule,
-    AngularMaterialModule,
-    HttpClientModule
-    ],
-  providers: [ { provide: HTTP_INTERCEPTORS, useClass: ApplicationHttpInterceptor, multi: true }],
-=======
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatButtonModule } from '@angular/material/button';
-import { HttpClientModule } from '@angular/common/http';
-import { api } from './Services/api.service';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -61,10 +41,11 @@ import { MatNativeDateModule } from '@angular/material/core';
     FormsModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    MatNativeDateModule
-  ],
-  providers: [api,MatDatepickerModule],
-
-  bootstrap: [AppComponent],
+    MatNativeDateModule,
+    AngularMaterialModule,
+    
+    ],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: ApplicationHttpInterceptor, multi: true },api,MatDatepickerModule,HttpClientService],
+bootstrap:[AppComponent]
 })
 export class AppModule {}
