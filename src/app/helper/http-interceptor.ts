@@ -8,8 +8,9 @@ export class ApplicationHttpInterceptor implements HttpInterceptor {
     const authReq = httpRequest.clone({
         headers: new HttpHeaders({
           'Content-Type':  'application/json',
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjkxNzkxNDk4OTciLCJuYW1laWQiOiI2MDA0MmFmZDQxMWQ5ZWMzYWE3NzU1MjYiLCJuYmYiOjE2MTA4ODU5MTEsImV4cCI6MTYxMDg4OTUxMSwiaWF0IjoxNjEwODg1OTExfQ.fj2jmFw2rdjwPaKu-vzDVvav4r3TiFwXhJyBEjUyBCg',
+          'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjkxNzkxNDk4OTciLCJuYW1laWQiOiI2MDA0MmFmZDQxMWQ5ZWMzYWE3NzU1MjYiLCJuYmYiOjE2MTExNzAwNTUsImV4cCI6MTYxMTE3MzY1NSwiaWF0IjoxNjExMTcwMDU1fQ.iui5KbTXGRpU6JyXsqkgAs9sz39aKnCbpAc1MVdWXaA',
           'device':'1'
+          
         })
       });
       console.log('Intercepted HTTP call', authReq);

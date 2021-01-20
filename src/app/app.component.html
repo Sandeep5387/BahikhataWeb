@@ -1,4 +1,3 @@
-
 <div class="Header">
   <div id="Heading">
     <h3 class="logo">bahi<span>khata</span></h3>
@@ -30,16 +29,21 @@
 </div>
 <div id="transaction">
   <div id="transactionLeft">
-    <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+    <form
+      [formGroup]="myReactiveTransaction"
+      #form="ngForm"
+      class="form_group"
+      autocomplete="off"
+      (submit)="onSubmit()"
+    >
       <div id="transactionLeft1">
         <mat-form-field id="CustomerName" appearance="outline" color="accent">
           <mat-label>Customer Name</mat-label>
           <input
             name="Cust_name"
-            #Cust_name="ngModel"
-            [(ngModel)]="apiService.formData.CustomerName"
             matInput
             placeholder="Placeholder"
+            formControlName="customerName"
           />
         </mat-form-field>
 
@@ -47,10 +51,9 @@
           <mat-label>Mobile Number</mat-label>
           <input
             name="Mob_Num"
-            #Mob_Num="ngModel"
-            [(ngModel)]="apiService.formData.MobileNumber"
             matInput
             placeholder="Placeholder"
+            formControlName="mobileNumber"
           />
         </mat-form-field>
       </div>
@@ -65,10 +68,9 @@
           <mat-label>Product</mat-label>
           <input
             name="Product"
-            #Product="ngModel"
-            [(ngModel)]="apiService.formData.ProductName"
             matInput
             placeholder="Placeholder"
+            formControlName="product"
           />
         </mat-form-field>
 
@@ -81,10 +83,9 @@
           <mat-label>Price</mat-label>
           <input
             name="Price"
-            #Price="ngModel"
-            [(ngModel)]="apiService.formData.Price"
             matInput
             placeholder="Placeholder"
+            formControlName="price"
           />
         </mat-form-field>
 
@@ -97,10 +98,9 @@
           <mat-label>Quantity</mat-label>
           <input
             name="Quantity"
-            #Quantity="ngModel"
-            [(ngModel)]="apiService.formData.Quantity"
             matInput
             placeholder="Placeholder"
+            formControlName="quantity"
           />
         </mat-form-field>
 
@@ -113,10 +113,9 @@
           <mat-label>Amount</mat-label>
           <input
             name="Amount"
-            #Amount="ngModel"
-            [(ngModel)]="apiService.formData.Amount"
             matInput
             placeholder="Placeholder"
+            formControlName="amount"
           />
         </mat-form-field>
 
@@ -129,8 +128,171 @@
           <mat-label>GST</mat-label>
           <input
             name="GST"
+            matInput
+            placeholder="Placeholder"
+            formControlName="gst"
+          />
+        </mat-form-field>
+
+        <button mat-button class="trans" id="addItem">
+          <mat-icon>add_circle_outline</mat-icon>
+        </button>
+      </div>
+      <div class="transactionLeft3">
+        <mat-form-field
+          id="DATE"
+          class="rapp"
+          appearance="outline"
+          color="accent"
+        >
+          <mat-label>Date</mat-label>
+          <input
+            name="Date"
+            matInput
+            placeholder="Placeholder"
+            [matDatepicker]="picker"
+            formControlName="date"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-checkbox
+          class="paid trans"
+          name="paid"
+          formControlName="paid"
+        ></mat-checkbox>
+      </div>
+
+      <div class="submit">
+        <button
+          type="submit"
+          mat-raised-button
+          class="trans"
+          id="Add"
+          color="accent"
+        >
+          Add
+        </button>
+
+        <button
+          type="reset"
+          mat-raised-button
+          class="trans"
+          id="Reset"
+          color="warn"
+        >
+          Reset
+        </button>
+      </div>
+    </form>
+  </div>
+  <!-- <div class="btn btnArray form_group" formArrayName='addProduct'>
+
+    <form [formGroup]='myReactiveTransaction' #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+      <div id="transactionLeft1">
+        <mat-form-field id="CustomerName" appearance="outline" color="accent">
+          <mat-label for='CustomerName'>Customer Name</mat-label>
+          <input
+            name="Cust_name"
+            #Cust_name="ngModel"
+            
+            matInput
+            placeholder="Placeholder"
+          />
+        </mat-form-field>
+
+        <mat-form-field id="mob_num" appearance="outline" color="accent">
+          <mat-label for='MobileNumber'>Mobile Number</mat-label>
+          <input
+            name="Mob_Num"
+            #Mob_Num="ngModel"
+            
+            matInput
+            placeholder="Placeholder"
+          />
+        </mat-form-field>
+      </div>
+      <div class="transactionLeft2">
+        <mat-form-field
+          id="Prdct"
+          class="rapp"
+          appearance="outline"
+          color="accent"
+          width="93px"
+        >
+          <mat-label for='Product'>Product</mat-label>
+          <input
+            name="Product"
+            #Product="ngModel"
+            
+            matInput
+            placeholder="Placeholder"
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          id="Price"
+          class="trans"
+          appearance="outline"
+          color="accent"
+        >
+          <mat-label for='Price'>Price</mat-label>
+          <input
+            name="Price"
+            #Price="ngModel"
+            
+            matInput
+            placeholder="Placeholder"
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          id="QNT"
+          class="trans"
+          appearance="outline"
+          color="accent"
+        >
+          <mat-label for='Quantity'>Quantity</mat-label>
+          <input
+            name="Quantity"
+            #Quantity="ngModel"
+            
+            matInput
+            placeholder="Placeholder"
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          id="AMT"
+          class="trans"
+          appearance="outline"
+          color="accent"
+        >
+          <mat-label for='Amount'>Amount</mat-label>
+          <input
+            name="Amount"
+            #Amount="ngModel"
+            
+            matInput
+            placeholder="Placeholder"
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          id="GST"
+          class="trans"
+          appearance="outline"
+          color="accent"
+        >
+          <mat-label for='GST'>GST</mat-label>
+          <input
+            name="GST"
             #GST="ngModel"
-            [(ngModel)]="apiService.formData.GST"
+            
             matInput
             placeholder="Placeholder"
           />
@@ -151,7 +313,7 @@
           <input
             name="Date"
             #Date="ngModel"
-            [(ngModel)]="apiService.formData.Date"
+            
             matInput
             placeholder="Placeholder"
             [matDatepicker]="picker"
@@ -163,7 +325,7 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
-        <mat-checkbox class="paid trans"  name=paid #paid="ngModel" [(ngModel)]="apiService.formData.paid">paid</mat-checkbox>
+        <mat-checkbox class="paid trans"  name=paid #paid="ngModel" 
         
       
       </div>
@@ -178,7 +340,8 @@
       </button>
     </div>
   </form>
-  </div>
+
+  </div> -->
   <div id="transactionRight" class="tnsctn"></div>
 </div>
 <div>
@@ -192,20 +355,24 @@
       <th>ProductName</th>
       <th>Price</th>
       <th>Amount</th>
-      <th>Date</th>
       <th>GST</th>
-     
+      <th>Date</th>
     </tr>
 
     <tr *ngFor="let com of lstposts">
-      <td>{{ com.CustomerName }}</td>
-      <td>{{ com.Quantity }}</td>
-      <td>{{ com.MobileNumber }}</td>
-      <td>{{ com.ProductName }}</td>
-      <td>{{ com.Price }}</td>
-      <td>{{ com.Amount }}</td>
-      <td>{{ com.Date }}</td>
-      <td>{{ com.GST }}</td>
+      <td>{{ com.customer.name }}</td>
+      <td>
+        <div *ngFor="let p of com.products">
+          {{ p.quantity }}
+          <div>{{ com.customer.contactNumber }}</div>
+          <div>{{ p.product.name }}</div>
+          <div>{{ p.product.price }}</div>
+          <div>{{ p.amount }}</div>
+          <div>{{ p.product.gst }}</div>
+        </div>
+      </td>
+
+      <td>{{ com.date }}</td>
+    </tr>
   </table>
 </div>
-

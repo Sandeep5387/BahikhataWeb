@@ -19,7 +19,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
-import { from } from 'rxjs';
+//import { form } from 'rxjs';
 
 @NgModule({
   declarations: 
@@ -43,7 +43,7 @@ import { from } from 'rxjs';
     MatDatepickerModule,
     MatNativeDateModule,
     AngularMaterialModule,
-    
+    ReactiveFormsModule
     ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: ApplicationHttpInterceptor, multi: true },api,MatDatepickerModule,HttpClientService],
 bootstrap:[AppComponent]
