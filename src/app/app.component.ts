@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { api } from './Services/api.service';
 import {
   HttpClient,
@@ -22,19 +29,31 @@ export class AppComponent implements OnInit {
     private httpService: HttpClientService
   ) {
     this.myReactiveTransaction = new FormGroup({
-      customerName: new FormControl(''),
-      mobileNumber: new FormControl(''),
-      product: new FormControl(''),
-      price: new FormControl(''),
-      quantity: new FormControl(''),
-      amount: new FormControl(''),
-      gst: new FormControl(''),
-      date: new FormControl(''),
+      customerName: new FormControl('', Validators.required),
+      mobileNumber: new FormControl('', [
+        Validators.maxLength(10),
+        Validators.minLength(10),
+      ]),
+      date: new FormControl('', Validators.required),
       paid: new FormControl(false),
+
+      addProductDetailFields: new FormArray([
+        new FormGroup({
+          product: new FormControl('', Validators.required),
+          price: new FormControl('', Validators.required),
+          quantity: new FormControl('', Validators.required),
+          amount: new FormControl('', Validators.required),
+          gst: new FormControl('', Validators.required),
+        }),
+      ]),
     });
+    this.formArray = this.myReactiveTransaction.get(
+      'addProductDetailFields'
+    ) as FormArray;
   }
   lstcomments: any = [];
   lstposts: Transactions[] = [];
+  formArray: FormArray;
 
   ngOnInit() {
     // this.apiService.getComments().subscribe((data) => {
@@ -97,6 +116,7 @@ export class AppComponent implements OnInit {
     // JSON.stringify(req)
     console.log(JSON.stringify(req));
     this.httpService.post('api/Transaction/addTransaction', req).subscribe();
+    this.getProducts();
   }
 
   getProducts() {
@@ -106,6 +126,7 @@ export class AppComponent implements OnInit {
         this.lstposts = data.payload;
       });
   }
+
   resetForm(form?: NgForm) {
     if (form != null) form.resetForm();
     this.apiService.formData = {
@@ -119,6 +140,18 @@ export class AppComponent implements OnInit {
       GST: null,
       paid: false,
     };
+  }
+
+  onAdd() {
+    this.formArray.push(
+      new FormGroup({
+        product: new FormControl('', Validators.required),
+        price: new FormControl('', Validators.required),
+        quantity: new FormControl('', Validators.required),
+        amount: new FormControl('', Validators.required),
+        gst: new FormControl('', Validators.required),
+      })
+    );
   }
 
   title = 'BahikhataWeb';
