@@ -1,50 +1,104 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { IUser } from 'src/app/interfaces/user.interface';
+import { Alert, MessageType } from 'src/app/interfaces/alert.interface';
+import { TokenSingleTone } from 'src/app/interfaces/token-single-tone';
+import { IUser, IUserDetails } from 'src/app/interfaces/user.interface';
+import { AlertService } from 'src/app/service/alert.service';
 import { RegisterService } from 'src/app/service/register.service';
-import { SnackbarComponent } from '../snackbar/snackbar.component';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  registerForm!: FormGroup;
 
-  loginForm!: FormGroup;
-
-  constructor( private registerService:RegisterService, private formBuilder:FormBuilder,public snackBar: MatSnackBar) {
-  }
+  constructor(
+    private registerService: RegisterService,
+    private formBuilder: FormBuilder,
+    private alertService: AlertService
+  ) {}
 
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      "username": ['', [Validators.required, Validators.minLength(4)]],
-      "password": ['', [Validators.required, Validators.minLength(8), Validators.max(12)]],
-      "confirmpassword": ['', [Validators.required, Validators.minLength(8), Validators.max(12)]]
+    this.registerForm = this.formBuilder.group({
+      username: ['', [Validators.required, Validators.minLength(10)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmpassword: ['', [Validators.required, Validators.minLength(8)]],
+      acceptterm: [false, [Validators.requiredTrue]],
     });
   }
 
-  get lf() { return this.loginForm.controls; }
+  get lf() {
+    return this.registerForm.controls;
+  }
 
-  submit()
-  {
-    let user:IUser={username: this.lf.username.value,password:this.lf.password.value}
-    this.registerService.register(user).subscribe(
-      data=>
-      {
-        console.log(data)
+  submit() {
+    this.alertService.clertAlerts();
+    let alerts: Alert[] = [];
+    if (this.lf['username'].invalid) {
+      alerts.push({
+        type: MessageType.error,
+        message: 'Please enter Mobile Number',
       });
+    }
 
-    // this.openSnackBar("Hello Message","Register");
+    if (this.lf['password'].invalid) {
+      alerts.push({
+        type: MessageType.error,
+        message: 'Please enter Password',
+      });
+    }
 
+    if (this.lf['confirmpassword'].invalid) {
+      alerts.push({
+        type: MessageType.error,
+        message: 'Please enter Confirm Password',
+      });
+    }
+
+    console.log(this.lf['acceptterm']);
+    if (this.lf['acceptterm'].invalid) {
+      alerts.push({
+        type: MessageType.error,
+        message: 'Please accept terms.',
+      });
+    }
+
+    if(!this.lf['password'].invalid && !this.lf['confirmpassword'].invalid
+    && this.lf['confirmpassword'].value != this.lf['confirmpassword'].value )
+    {
+      alerts.push({
+        type: MessageType.error,
+        message: 'Password and Confirm Password should be match',
+      });
+    }
+
+    if (alerts.length == 0) {
+      let user: IUserDetails = {
+        username: this.lf.username.value,
+        password: this.lf.password.value,
+        id:"",
+        createdAt:"",
+        lastModified: "",
+        lastLoginTime:"",
+        loginDeviceType: "",
+      };
+      this.registerService.register(user).subscribe((data) => {
+        if (data.metadata.status == 'Success' && data.error==null) {
+          alerts.push({
+            type: MessageType.success,
+            message: "User created successfully.",
+          });
+        }
+        else{
+          data.error.forEach(o=>alerts.push({
+            type: MessageType.error,
+            message: o.message,
+          }));
+        }
+      });
+    } else this.alertService.showAlert(alerts);
   }
-
-  openSnackBar(message: string, panelClass: string) {
-    this.snackBar.openFromComponent(SnackbarComponent, {
-      data: message,
-      panelClass: panelClass,
-      duration: 10000
-    });
-}
 }

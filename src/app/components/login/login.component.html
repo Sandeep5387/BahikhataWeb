@@ -1,1 +1,36 @@
-<p>login works!</p>
+<hr class="register-line" />
+
+<form [formGroup]="loginForm" autocomplete="off" (ngSubmit)="submit()">
+  <div class="register-title">
+    <h3 class="logo">Bahi<span>khata</span></h3>
+  </div>
+  <h2 class="register-header">Login to your bahikhata account</h2>
+
+  <p>
+    <mat-form-field appearance="outline" color="accent" class="username">
+      <mat-label>Mobile Number</mat-label>
+      <input matInput placeholder="+91-XXXXXXXXXX" formControlName="username" />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="outline" color="accent" class="password">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        placeholder="XXXXXXXXXX"
+        type="password"
+        formControlName="password"
+      />
+    </mat-form-field>
+  </p>
+  <section>
+    <div class="example-button-row register-button">
+      <button mat-raised-button color="primary">Login</button>
+    </div>
+  </section>
+
+  <p>
+    <mat-label  class="already-user">New user?</mat-label>
+    <a class="sign-in" href="" >Register</a>
+  </p>
+</form>

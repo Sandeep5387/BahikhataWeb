@@ -1,0 +1,16 @@
+@import "../../../scss/mixins";
+@import "../../../scss/variables";
+
+.heading {
+  max-width: ConvertToRem(1255);
+  margin: 0 auto;
+  background: $primary-gradient;
+  color: $white;
+  padding: ConvertToRem(6) ConvertToRem(11);
+
+  &__title {
+    font-size: ConvertToRem(24);
+    line-height: ConvertToRem(28);
+    font-weight: 400;
+  }
+}

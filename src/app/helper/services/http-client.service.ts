@@ -4,10 +4,6 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/internal/operators/map';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { environment } from 'src/environments/environment';
-import {
-  ResponseModel,
-  RootObject,
-} from 'src/app/interfaces/payload.interface';
 import Constants from '../constants';
 
 @Injectable({
@@ -15,7 +11,34 @@ import Constants from '../constants';
 })
 export class HttpClientService {
   constructor(private httpClient: HttpClient) {}
+  get(resource: string): Observable<any> {
+    return this.httpClient.get(`${environment.apiurl}/${resource}`)
+      .pipe(
+        map((response: any) => {
+          console.log('response');
+          console.log(response);
+          return this.constructResponse(response);
+        }),
+        catchError((error: any) => {
+          console.log('error');
+          return this.sendInvalidResponse(null, error.status, error.statusText);
+        }));
+  }
 
+  post(resource: string, data: any): Observable<any> {
+    return this.httpClient
+      .post(`${environment.apiurl}/${resource}`, data)
+      .pipe(
+        map((response: any) => {
+          return this.constructResponse(response);
+        }),
+        catchError((error: any) => {
+          console.log('error');
+          console.log(error);
+          return this.sendInvalidResponse(null, error.status, error.statusText);
+        })
+      );
+    
   get(resource: string, headersList?: any): Observable<any> {
     return this.httpClient.get(`${environment.apiurl}/${resource}`).pipe(
       map((response: any) => {
@@ -49,11 +72,13 @@ export class HttpClientService {
 
   constructResponse(response: any): any {
     if (response != null) {
-      let responseModel: ResponseModel = {
+      let responseModel: any = {
         error: response.error ? response.error : null,
         payload: response.payload ? response.payload : null,
         metadata: response.metadata ? response.metadata : '',
       };
+      console.log("responseModel");
+      console.log(responseModel);
       return responseModel;
     }
   }
@@ -62,7 +87,7 @@ export class HttpClientService {
     result: any,
     statusCode: number,
     statusMessage: string
-  ): Observable<ResponseModel> {
+  ): Observable<any> {
     let errormessage: string;
     // write switch case to render correct and proper response
     switch (statusCode) {
@@ -88,7 +113,7 @@ export class HttpClientService {
         errormessage = Constants.defaultExceptionMessage;
         break;
     }
-    let responseModel: ResponseModel = {
+    let responseModel: any = {
       error: [{ code: statusCode.toString(), message: errormessage }],
       payload: null,
       metadata: { module: '', status: '' },

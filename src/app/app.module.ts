@@ -3,7 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  MatFormFieldModule,
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+} from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
@@ -11,23 +14,34 @@ import { RegisterComponent } from './../app/components/register/register.compone
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { ApplicationHttpInterceptor } from './helper/http-interceptor';
-import { HttpClientService } from './helper/services/http-client.service';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatNativeDateModule } from '@angular/material/core';
-import { HomeComponent } from './home/home.component';
-//import { form } from 'rxjs';
+import { AlertComponent } from './components/alert/alert.component';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from './shared/shared.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
+    AlertComponent,
     SnackbarComponent,
     HomeComponent,
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    AngularMaterialModule,
+    HttpClientModule,
+    RouterModule.forRoot([
+      { path: '', component: RegisterComponent },
+      { path: 'login', component: LoginComponent },
+    ]),
+    SharedModule,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +64,10 @@ import { HomeComponent } from './home/home.component';
       provide: HTTP_INTERCEPTORS,
       useClass: ApplicationHttpInterceptor,
       multi: true,
+    },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'fill' },
     },
     MatDatepickerModule,
     HttpClientService,
