@@ -18,6 +18,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
+import { HomeComponent } from './home/home.component';
 //import { form } from 'rxjs';
 
 @NgModule({
@@ -26,6 +27,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     RegisterComponent,
     LoginComponent,
     SnackbarComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
