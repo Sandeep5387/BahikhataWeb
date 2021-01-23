@@ -11,7 +11,6 @@ import Constants from '../constants';
 })
 export class HttpClientService {
   constructor(private httpClient: HttpClient) {}
-
   get(resource: string): Observable<any> {
     return this.httpClient.get(`${environment.apiurl}/${resource}`)
       .pipe(
@@ -39,6 +38,36 @@ export class HttpClientService {
           return this.sendInvalidResponse(null, error.status, error.statusText);
         })
       );
+    
+  get(resource: string, headersList?: any): Observable<any> {
+    return this.httpClient.get(`${environment.apiurl}/${resource}`).pipe(
+      map((response: any) => {
+        console.log('response');
+        console.log(response);
+        return this.constructResponse(response);
+      }),
+      catchError((error: Response) => {
+        console.log('error');
+        return this.sendInvalidResponse(null, error.status, error.statusText);
+      })
+    );
+  }
+
+  post(resource: string, data: RootObject): Observable<any> {
+    return this.httpClient.post(`${environment.apiurl}/${resource}`, data).pipe(
+      map((response: any) => {
+        console.log('response');
+        console.log(response);
+        if (response == null) {
+          console.log('Resoponse is null');
+        }
+        return this.constructResponse(response);
+      }),
+      catchError((error: Response) => {
+        console.log('error');
+        return this.sendInvalidResponse(null, error.status, error.statusText);
+      })
+    );
   }
 
   constructResponse(response: any): any {
