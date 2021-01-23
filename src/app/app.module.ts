@@ -3,12 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  MatFormFieldModule,
-  MAT_FORM_FIELD_DEFAULT_OPTIONS,
-} from '@angular/material/form-field';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { RegisterComponent } from './../app/components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
@@ -16,9 +12,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApplicationHttpInterceptor } from './helper/http-interceptor';
 import { AlertComponent } from './components/alert/alert.component';
-import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -36,10 +32,7 @@ import { HomeComponent } from './home/home.component';
     MatIconModule,
     AngularMaterialModule,
     HttpClientModule,
-    RouterModule.forRoot([
-      { path: '', component: RegisterComponent },
-      { path: 'login', component: LoginComponent },
-    ]),
+    AppRoutingModule,
     SharedModule,
   ],
   providers: [
