@@ -7,12 +7,11 @@ export class ApplicationHttpInterceptor implements HttpInterceptor {
   intercept(httpRequest: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authReq = httpRequest.clone({
         headers: new HttpHeaders({
-          'Content-Type':  'application/json',
-          'Authorization': 'my-auth-token',
           'device':'1'
         })
       });
       console.log('Intercepted HTTP call', authReq);
+     
       return next.handle(authReq);
   }
 }

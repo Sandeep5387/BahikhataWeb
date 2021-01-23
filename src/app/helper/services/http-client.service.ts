@@ -16,7 +16,7 @@ import Constants from '../constants';
 export class HttpClientService {
   constructor(private httpClient: HttpClient) {}
 
-  get(resource: string, headersList: any): Observable<any> {
+  get(resource: string): Observable<any> {
     return this.httpClient.get(`${environment.apiurl}/${resource}`)
       .pipe(
         map((response: any) => {
@@ -42,6 +42,7 @@ export class HttpClientService {
         }),
         catchError((error: Response) => {
           console.log('error');
+          console.log(error);
           return this.sendInvalidResponse(null, error.status, error.statusText);
         })
       );
@@ -54,6 +55,8 @@ export class HttpClientService {
         payload: response.payload ? response.payload : null,
         metadata: response.metadata ? response.metadata : '',
       };
+      console.log("responseModel");
+      console.log(responseModel);
       return responseModel;
     }
   }
