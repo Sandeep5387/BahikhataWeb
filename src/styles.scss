@@ -44,7 +44,13 @@ html,
 body {
   height: 100%;
 }
-body {
+*,
+*::after,
+*::before {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+}
+img {
+  max-width: 100%;
 }
