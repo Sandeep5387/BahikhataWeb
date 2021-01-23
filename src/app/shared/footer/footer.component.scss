@@ -1,0 +1,23 @@
+@import "../../../scss/variables";
+@import "../../../scss/mixins";
+
+.footer {
+  background: $primary-gradient;
+  margin: 0 auto;
+  color: $white;
+  font-family: $ff-primary;
+  padding: ConvertToRem(14) ConvertToRem(48);
+
+  &__info {
+    p {
+      margin: 0;
+      font-weight: bold;
+      line-height: ConvertToRem(14);
+      font-size: ConvertToRem(12);
+      &:first-child {
+        font-size: ConvertToRem(18);
+        line-height: ConvertToRem(20);
+      }
+    }
+  }
+}
