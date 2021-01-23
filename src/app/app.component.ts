@@ -7,7 +7,6 @@ import {
   NgForm,
   Validators,
 } from '@angular/forms';
-import { api } from './Services/api.service';
 import {
   HttpClient,
   HttpParams,
@@ -24,7 +23,6 @@ import { Transactions, Response } from './interfaces/response.interface';
 export class AppComponent implements OnInit {
   myReactiveTransaction: FormGroup;
   constructor(
-    public apiService: api,
     public httpClient: HttpClient,
     private httpService: HttpClientService
   ) {
@@ -129,17 +127,6 @@ export class AppComponent implements OnInit {
 
   resetForm(form?: NgForm) {
     if (form != null) form.resetForm();
-    this.apiService.formData = {
-      CustomerName: '',
-      MobileNumber: '',
-      ProductName: '',
-      Price: null,
-      Amount: null,
-      Quantity: null,
-      Date: null,
-      GST: null,
-      paid: false,
-    };
   }
 
   onAdd() {

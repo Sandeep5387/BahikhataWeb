@@ -13,8 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { ApplicationHttpInterceptor } from './helper/http-interceptor';
-import { api } from './Services/api.service';
-import {HttpClientService} from './helper/services/http-client.service'
+import { HttpClientService } from './helper/services/http-client.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -22,14 +21,13 @@ import { MatNativeDateModule } from '@angular/material/core';
 //import { form } from 'rxjs';
 
 @NgModule({
-  declarations: 
-  [AppComponent, 
+  declarations: [
+    AppComponent,
     RegisterComponent,
     LoginComponent,
-    SnackbarComponent]
-    ,
-  imports: 
-  [
+    SnackbarComponent,
+  ],
+  imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
@@ -43,9 +41,17 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     MatNativeDateModule,
     AngularMaterialModule,
-    ReactiveFormsModule
-    ],
-  providers: [ { provide: HTTP_INTERCEPTORS, useClass: ApplicationHttpInterceptor, multi: true },api,MatDatepickerModule,HttpClientService],
-bootstrap:[AppComponent]
+    ReactiveFormsModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApplicationHttpInterceptor,
+      multi: true,
+    },
+    MatDatepickerModule,
+    HttpClientService,
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

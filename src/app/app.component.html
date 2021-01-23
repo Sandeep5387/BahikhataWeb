@@ -17,9 +17,7 @@
       </p>
       <p id="Logout">
         <a href="url">
-          <mat-icon aria-hidden="false" aria-label="Example home icon"
-            >power_settings_new</mat-icon
-          >
+          <mat-icon aria-hidden="false" aria-label="Example home icon">power_settings_new</mat-icon>
         </a>
       </p>
     </div>
@@ -30,32 +28,17 @@
   </div>
   <div id="transaction">
     <div id="transactionLeft">
-      <form
-        [formGroup]="myReactiveTransaction"
-        #form="ngForm"
-        class="form_group"
-        autocomplete="off"
-        (submit)="onSubmit()"
-      >
+      <form [formGroup]="myReactiveTransaction" #form="ngForm" class="form_group" autocomplete="off"
+        (submit)="onSubmit()">
         <div id="transactionLeft1">
           <mat-form-field id="CustomerName" appearance="outline" color="accent">
             <mat-label>Customer Name</mat-label>
-            <input
-              name="Cust_name"
-              matInput
-              placeholder="Placeholder"
-              formControlName="customerName"
-            />
+            <input name="Cust_name" matInput placeholder="Placeholder" formControlName="customerName" />
           </mat-form-field>
 
           <mat-form-field id="mob_num" appearance="outline" color="accent">
             <mat-label>Mobile Number</mat-label>
-            <input
-              name="Mob_Num"
-              matInput
-              placeholder="Placeholder"
-              formControlName="mobileNumber"
-            />
+            <input name="Mob_Num" matInput placeholder="Placeholder" formControlName="mobileNumber" />
           </mat-form-field>
         </div>
         <!-- <div class="transactionLeft2">
@@ -142,140 +125,55 @@
 
         <div class="transactionLeft2" formArrayName="addProductDetailFields">
           <ng-container *ngFor="let productField of formArray.controls; let i=index">
-            <ng-container [formGroup]="i">
-              <mat-form-field
-                id="Prdct"
-                class="rapp"
-                appearance="outline"
-                color="accent"
-                width="93px"
-              >
+            <ng-container [formGroupName]="i">
+              <mat-form-field id="Prdct" class="rapp" appearance="outline" color="accent" width="93px">
                 <mat-label>Product</mat-label>
-                <input
-                  name="Product"
-                  matInput
-                  placeholder="Placeholder"
-                  formControlName="product"
-                />
+                <input name="Product" matInput placeholder="Placeholder" formControlName="product" />
               </mat-form-field>
 
-              <mat-form-field
-                id="Price"
-                class="trans"
-                appearance="outline"
-                color="accent"
-              >
+              <mat-form-field id="Price" class="trans" appearance="outline" color="accent">
                 <mat-label>Price</mat-label>
-                <input
-                  name="Price"
-                  matInput
-                  placeholder="Placeholder"
-                  formControlName="price"
-                />
+                <input name="Price" matInput placeholder="Placeholder" formControlName="price" />
               </mat-form-field>
 
-              <mat-form-field
-                id="QNT"
-                class="trans"
-                appearance="outline"
-                color="accent"
-              >
+              <mat-form-field id="QNT" class="trans" appearance="outline" color="accent">
                 <mat-label>Quantity</mat-label>
-                <input
-                  name="Quantity"
-                  matInput
-                  placeholder="Placeholder"
-                  formControlName="quantity"
-                />
+                <input name="Quantity" matInput placeholder="Placeholder" formControlName="quantity" />
               </mat-form-field>
 
-              <mat-form-field
-                id="AMT"
-                class="trans"
-                appearance="outline"
-                color="accent"
-              >
+              <mat-form-field id="AMT" class="trans" appearance="outline" color="accent">
                 <mat-label>Amount</mat-label>
-                <input
-                  name="Amount"
-                  matInput
-                  placeholder="Placeholder"
-                  formControlName="amount"
-                />
+                <input name="Amount" matInput placeholder="Placeholder" formControlName="amount" />
               </mat-form-field>
 
-              <mat-form-field
-                id="GST"
-                class="trans"
-                appearance="outline"
-                color="accent"
-              >
+              <mat-form-field id="GST" class="trans" appearance="outline" color="accent">
                 <mat-label>GST</mat-label>
-                <input
-                  name="GST"
-                  matInput
-                  placeholder="Placeholder"
-                  formControlName="gst"
-                />
+                <input name="GST" matInput placeholder="Placeholder" formControlName="gst" />
               </mat-form-field>
 
-              <button
-                mat-button
-                class="trans btn-add btn btn-light"
-                id="addItem" (click)="onAdd()"
-              >
+              <button mat-button class="trans btn-add btn btn-light" id="addItem" (click)="onAdd()">
                 <mat-icon>add_circle_outline</mat-icon>
               </button>
             </ng-container>
           </ng-container>
         </div>
         <div class="transactionLeft3">
-          <mat-form-field
-            id="DATE"
-            class="rapp"
-            appearance="outline"
-            color="accent"
-          >
+          <mat-form-field id="DATE" class="rapp" appearance="outline" color="accent">
             <mat-label>Date</mat-label>
-            <input
-              name="Date"
-              matInput
-              placeholder="Placeholder"
-              [matDatepicker]="picker"
-              formControlName="date"
-            />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
+            <input name="Date" matInput placeholder="Placeholder" [matDatepicker]="picker" formControlName="date" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
 
-          <mat-checkbox
-            class="paid trans"
-            name="paid"
-            formControlName="paid"
-          ></mat-checkbox>
+          <mat-checkbox class="paid trans" name="paid" formControlName="paid"></mat-checkbox>
         </div>
 
         <div class="submit">
-          <button
-            type="button"
-            mat-raised-button
-            class="trans"
-            id="Add"
-            color="accent"
-          >
+          <button type="button" mat-raised-button class="trans" id="Add" color="accent">
             Add
           </button>
 
-          <button
-            type="reset"
-            mat-raised-button
-            class="trans"
-            id="Reset"
-            color="warn"
-          >
+          <button type="reset" mat-raised-button class="trans" id="Reset" color="warn">
             Reset
           </button>
         </div>
