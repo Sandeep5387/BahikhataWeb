@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Alert, MessageType } from 'src/app/interfaces/alert.interface';
-import { TokenSingleTone } from 'src/app/interfaces/token-single-tone';
-import { IUser, IUserDetails } from 'src/app/interfaces/user.interface';
-import { AlertService } from 'src/app/service/alert.service';
-import { RegisterService } from 'src/app/service/register.service';
+import { Alert, MessageType } from '../../interfaces/alert.interface';
+import { IUserDetails } from '../../interfaces/user.interface';
+import { AlertService } from '../../service/alert.service';
+import { RegisterService } from '../../service/register.service';
 
 @Component({
   selector: 'app-register',
@@ -66,9 +64,11 @@ export class RegisterComponent implements OnInit {
       });
     }
 
-    if(!this.lf['password'].invalid && !this.lf['confirmpassword'].invalid
-    && this.lf['confirmpassword'].value != this.lf['confirmpassword'].value )
-    {
+    if (
+      !this.lf['password'].invalid &&
+      !this.lf['confirmpassword'].invalid &&
+      this.lf['confirmpassword'].value != this.lf['confirmpassword'].value
+    ) {
       alerts.push({
         type: MessageType.error,
         message: 'Password and Confirm Password should be match',
@@ -79,24 +79,25 @@ export class RegisterComponent implements OnInit {
       let user: IUserDetails = {
         username: this.lf.username.value,
         password: this.lf.password.value,
-        id:"",
-        createdAt:"",
-        lastModified: "",
-        lastLoginTime:"",
-        loginDeviceType: "",
+        id: '',
+        createdAt: '',
+        lastModified: '',
+        lastLoginTime: '',
+        loginDeviceType: '',
       };
       this.registerService.register(user).subscribe((data) => {
-        if (data.metadata.status == 'Success' && data.error==null) {
+        if (data.metadata.status == 'Success' && data.error == null) {
           alerts.push({
             type: MessageType.success,
-            message: "User created successfully.",
+            message: 'User created successfully.',
           });
-        }
-        else{
-          data.error.forEach(o=>alerts.push({
-            type: MessageType.error,
-            message: o.message,
-          }));
+        } else {
+          data.error.forEach((o: { message: any }) =>
+            alerts.push({
+              type: MessageType.error,
+              message: o.message,
+            })
+          );
         }
       });
     } else this.alertService.showAlert(alerts);
