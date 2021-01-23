@@ -4,7 +4,7 @@ export interface Alert{
 }
 
 export enum MessageType {
-    NoMessage,
+    enomessage,
     info,
     success,
     warning,

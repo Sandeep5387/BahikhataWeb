@@ -4,8 +4,8 @@
         password: string;
     }
 
-    export interface RootObject {
-        payload: any;
+    export interface Request<T> {
+        payload: T;
     }
 
     export interface ErrorModel {
@@ -13,9 +13,9 @@
         message:string;
     }
 
-    export interface ResponseModel{
+    export interface Response<T>{
         error:ErrorModel[],
-        payload:any,
+        payload:T,
         metadata:MetadataModel
     }
 

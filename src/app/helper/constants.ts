@@ -22,6 +22,8 @@ export default class Constants {
     public static readonly loggedInUser_lsKey = 'user';
     public static readonly lastTokenNumber_lsKey = 'lastTokenNumber'
     public static readonly activeTokenNumber_lsKey = 'activeTokenNumber'
+    public static readonly username = 'username'
+    public static readonly userid = 'userid'
 
     public static readonly login_routePath = '/login'
     public static readonly dashboard_routePath = '/dashboard'

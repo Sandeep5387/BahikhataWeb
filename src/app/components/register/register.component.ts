@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Alert, MessageType } from 'src/app/interfaces/alert.interface';
-import { IUser } from 'src/app/interfaces/user.interface';
+import { TokenSingleTone } from 'src/app/interfaces/token-single-tone';
+import { IUser, IUserDetails } from 'src/app/interfaces/user.interface';
 import { AlertService } from 'src/app/service/alert.service';
 import { RegisterService } from 'src/app/service/register.service';
 
@@ -25,6 +26,7 @@ export class RegisterComponent implements OnInit {
       username: ['', [Validators.required, Validators.minLength(10)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmpassword: ['', [Validators.required, Validators.minLength(8)]],
+      acceptterm: [false, [Validators.requiredTrue]],
     });
   }
 
@@ -35,7 +37,6 @@ export class RegisterComponent implements OnInit {
   submit() {
     this.alertService.clertAlerts();
     let alerts: Alert[] = [];
-    console.log(this.lf['username']);
     if (this.lf['username'].invalid) {
       alerts.push({
         type: MessageType.error,
@@ -57,6 +58,14 @@ export class RegisterComponent implements OnInit {
       });
     }
 
+    console.log(this.lf['acceptterm']);
+    if (this.lf['acceptterm'].invalid) {
+      alerts.push({
+        type: MessageType.error,
+        message: 'Please accept terms.',
+      });
+    }
+
     if(!this.lf['password'].invalid && !this.lf['confirmpassword'].invalid
     && this.lf['confirmpassword'].value != this.lf['confirmpassword'].value )
     {
@@ -67,14 +76,28 @@ export class RegisterComponent implements OnInit {
     }
 
     if (alerts.length == 0) {
-      let user: IUser = {
+      let user: IUserDetails = {
         username: this.lf.username.value,
         password: this.lf.password.value,
+        id:"",
+        createdAt:"",
+        lastModified: "",
+        lastLoginTime:"",
+        loginDeviceType: "",
       };
       this.registerService.register(user).subscribe((data) => {
-        if ((data.metadata.status = 'Success')) {
+        if (data.metadata.status == 'Success' && data.error==null) {
+          alerts.push({
+            type: MessageType.success,
+            message: "User created successfully.",
+          });
         }
-        console.log(data);
+        else{
+          data.error.forEach(o=>alerts.push({
+            type: MessageType.error,
+            message: o.message,
+          }));
+        }
       });
     } else this.alertService.showAlert(alerts);
   }
