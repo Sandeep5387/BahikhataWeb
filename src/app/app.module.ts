@@ -18,7 +18,7 @@ import { ApplicationHttpInterceptor } from './helper/http-interceptor';
 import { AlertComponent } from './components/alert/alert.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
-
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,6 @@ import { SharedModule } from './shared/shared.module';
     RegisterComponent,
     LoginComponent,
     AlertComponent,
-    SnackbarComponent,
     HomeComponent,
   ],
   imports: [
@@ -43,22 +42,6 @@ import { SharedModule } from './shared/shared.module';
     ]),
     SharedModule,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    AngularMaterialModule,
-    ReactiveFormsModule,
-  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -69,8 +52,6 @@ import { SharedModule } from './shared/shared.module';
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'fill' },
     },
-    MatDatepickerModule,
-    HttpClientService,
   ],
   bootstrap: [AppComponent],
 })

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/internal/operators/map';
@@ -12,64 +12,31 @@ import Constants from '../constants';
 export class HttpClientService {
   constructor(private httpClient: HttpClient) {}
   get(resource: string): Observable<any> {
-    return this.httpClient.get(`${environment.apiurl}/${resource}`)
-      .pipe(
-        map((response: any) => {
-          console.log('response');
-          console.log(response);
-          return this.constructResponse(response);
-        }),
-        catchError((error: any) => {
-          console.log('error');
-          return this.sendInvalidResponse(null, error.status, error.statusText);
-        }));
-  }
-
-  post(resource: string, data: any): Observable<any> {
-    return this.httpClient
-      .post(`${environment.apiurl}/${resource}`, data)
-      .pipe(
-        map((response: any) => {
-          return this.constructResponse(response);
-        }),
-        catchError((error: any) => {
-          console.log('error');
-          console.log(error);
-          return this.sendInvalidResponse(null, error.status, error.statusText);
-        })
-      );
-    
-  get(resource: string, headersList?: any): Observable<any> {
     return this.httpClient.get(`${environment.apiurl}/${resource}`).pipe(
       map((response: any) => {
         console.log('response');
         console.log(response);
         return this.constructResponse(response);
       }),
-      catchError((error: Response) => {
+      catchError((error: any) => {
         console.log('error');
         return this.sendInvalidResponse(null, error.status, error.statusText);
       })
     );
   }
 
-  post(resource: string, data: RootObject): Observable<any> {
+  post(resource: string, data: any): Observable<any> {
     return this.httpClient.post(`${environment.apiurl}/${resource}`, data).pipe(
       map((response: any) => {
-        console.log('response');
-        console.log(response);
-        if (response == null) {
-          console.log('Resoponse is null');
-        }
         return this.constructResponse(response);
       }),
-      catchError((error: Response) => {
+      catchError((error: any) => {
         console.log('error');
+        console.log(error);
         return this.sendInvalidResponse(null, error.status, error.statusText);
       })
     );
   }
-
   constructResponse(response: any): any {
     if (response != null) {
       let responseModel: any = {
@@ -77,7 +44,7 @@ export class HttpClientService {
         payload: response.payload ? response.payload : null,
         metadata: response.metadata ? response.metadata : '',
       };
-      console.log("responseModel");
+      console.log('responseModel');
       console.log(responseModel);
       return responseModel;
     }
