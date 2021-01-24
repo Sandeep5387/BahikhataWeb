@@ -1,51 +1,7 @@
 @import "../../scss/variables";
+@import "../../scss/mixins";
 
-.Header {
-  flex: 1 1 auto;
-  display: flex;
-  flex-wrap: wrap;
-  text-align: center;
-  flex-direction: row;
-  height: 80px;
 
-  /* white */
-
-  background: #ffffff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-#HeaderLinks {
-  flex: 1 1 auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: right;
-  text-align: center;
-  flex-direction: column;
-
-  width: 30px;
-  height: 21px;
-  margin-left: 600px;
-  margin-top: 30px;
-  line-height: 21px;
-  /* identical to box height */
-  align-items: center;
-
-  color: #000000;
-}
-#Heading {
-  margin-left: 48px;
-  margin-top: 20px;
-
-  font-family: Comfortaa;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 36px;
-  line-height: 40px;
-  display: flex;
-  align-items: center;
-
-  color: #c7cecf;
-}
 
 #Logout {
   /* Red */
@@ -53,66 +9,38 @@
 }
 #transaction {
   display: flex;
+  flex-direction: column;
+  width: 60%;
 }
 #transactionLeft1 {
   /* white */
-  margin-top: 20px;
-  margin-left: 47px;
+  margin-top: ConvertToRem(20);
+  margin-left: ConvertToRem(47);
   background: #ffffff;
   /* Blue 1 */
 
-  border-radius: 6px;
+  border-radius: ConvertToRem(6);
 }
 
 #addTransaction {
-  /* Rectangle 11 */
+  
+  margin-top: ConvertToRem(15);
+  margin-left: ConvertToRem(-12);
 
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-
-  /* identical to box height */
-
-  display: flex;
-
-  align-items: center;
-
-  /* white */
-
-  color: #ffffff;
-
-  width: 94%;
-  height: 40px;
-  margin-left: 47px;
-  margin-top: 15px;
-
-  background: linear-gradient(90deg, #087e8b 0%, #108cc0 65.63%, #1494dc 100%);
-}
-.logo {
-  font-family: "Comfortaa";
-  color: $primary;
-  font-size: 36px;
-  text-transform: capitalize;
-  width: 194px;
-  height: 40px;
-
-  span {
-    color: $accent;
-  }
 }
 
 #mob_num {
-  margin-left: 35px;
+  margin-left: ConvertToRem(35);
   width: 20%;
 }
 .rapp {
-  width: 180px;
-  margin-left: 47px;
+  width: ConvertToRem(180);
+  margin-left: ConvertToRem(47);
 }
 
 .trans {
-  width: 80px;
-  margin-left: 15px;
+  width: ConvertToRem(80);
+  margin-left: ConvertToRem(15);
 }
 .CustomerName {
   width: 100%;
@@ -122,18 +50,35 @@
   background: $primary;
   /* Blue 1 */
   width: 5%;
-  border-radius: 6px;
+  border-radius: ConvertToRem(6);
 }
 #addItem:hover {
   background: $primary;
 }
 
 .submit {
-  margin-left: 30px;
+  margin-left: ConvertToRem(30);
+  margin-top: ConvertToRem(5);
+}
+
+.transactionHeader
+{
+  margin-top: ConvertToRem(50);
+  margin-left: ConvertToRem(-12);
 }
 
 .container {
   display: flex;
-  flex: auto;
+  flex: 1 1 100%;
   flex-direction: column;
+}
+
+.footer
+{
+  margin-left:ConvertToRem(47);
+  margin-top: ConvertToRem(5);
+}
+
+table {
+  width: 100%;
 }
