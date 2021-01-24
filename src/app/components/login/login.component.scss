@@ -1,126 +1,38 @@
 @import "../../../scss/variables";
+@import "../../../scss/mixins";
 
-.logo
-{
-  font-family: "Comfortaa";
-  color: $primary;
-  font-size: 36px;
-  text-transform: capitalize;
-  width: 194px;
-height: 40px;
-margin-top: 10px;
+.login {
+  @include AuthContainer();
 
-  span
-  {
-    color: $accent;
+  &__hr {
+    @include AuthHr();
+  }
+
+  &__logo {
+    @include AuthLogo();
+  }
+
+  &__subheading {
+    @include AuthSubheading();
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__field {
+    font-size: ConvertToRem(14);
+    margin-top: ConvertToRem(25);
+    max-width: ConvertToRem(300);
+  }
+
+  &__submit {
+    margin-top: ConvertToRem(32);
+    font-size: ConvertToRem(14);
+  }
+
+  &__link {
+    @include AuthLink();
   }
 }
-.register-Line {
-  // position: absolute;
-  width: 600px;
-  height: 0px;
-  left: 411px;
-  margin-left: 411px;
-  // top: 60px;
-}
-
-section{padding-top:10px;}
-.sign-in{
-  padding-left: 10px;
-  color: $accent;
-}
-.already-user
-{
-  padding-top: 100px;
-  // position: absolute;
-  width: 600px;
-  height: 0px;
-  left: 411px;
-  margin-left: 411px;
-  // top: 60px;
-}
-p{
-  padding-top: 10px;
-}
-.register-title {
-  // position: absolute;
-  width: 194px;
-  height: 40px;
-  left: 411px;
-  margin-left: 411px;
-  // top: 98px;
-
-  font-family: Comfortaa;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 36px;
-  line-height: 40px;
-  display: flex;
-  align-items: center;
-  color: #087e8b;
-}
-
-.register-header {
-  // position: absolute;
-  width: 433px;
-  height: 28px;
-  left: 411px;
-  margin-left: 411px;
-  // top: 160px;
-  font-family: Ubuntu;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 28px;
-  /* identical to box height */
-
-  display: flex;
-  align-items: center;
-
-  color: #000000;
-}
-.username {
-  // position: absolute;
-  width: 300px;
-  height: 47px;
-  left: 411px;
- //  top: 218px;
-}
-
-.confirm-password {
-  // position: absolute;
-  width: 207px;
-  height: 47px;
-  left: 411px;
- //  top: 295px;
-}
-
-.password {
-  // position: absolute;
-  width: 207px;
-  height: 47px;
-  left: 411px;
- //  top: 295px;
-}
-
-.register-checkbox {
-  // position: absolute;
-  width: 223px;
-  height: 20px;
-  left: 411px;
-  margin-left: 411px;
- //  top: 374px;
-}
-
-.register-button {
-  // position: absolute;
-  width: 87px;
-  height: 33px;
-  left: 411px;
-  margin-left: 411px;
-  margin-top: 10px;
-  // top: 426px;
-}
-
-
-

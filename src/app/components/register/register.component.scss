@@ -2,33 +2,18 @@
 @import "../../../scss/mixins";
 
 .register {
-  max-width: ConvertToRem(600);
-  padding-top: ConvertToRem(60);
-  margin-left: auto;
-  margin-right: auto;
+  @include AuthContainer();
 
   &__hr {
-    height: ConvertToRem(5);
-    background: linear-gradient(90deg, #087e8b 0%, #1494dc 50%);
+    @include AuthHr();
   }
 
   &__logo {
-    margin-top: ConvertToRem(36);
-    font-size: ConvertToRem(36);
-    line-height: ConvertToRem(36);
-    font-weight: bold;
-    font-family: $ff-primary;
-    color: $primary;
-    span {
-      color: $accent;
-    }
+    @include AuthLogo();
   }
 
   &__subheading {
-    margin-top: ConvertToRem(22);
-    font-weight: 400;
-    font-size: ConvertToRem(24);
-    line-height: ConvertToRem(28);
+    @include AuthSubheading();
   }
 
   &__form {
@@ -41,7 +26,6 @@
   }
 
   &__field {
-    display: block;
     font-size: ConvertToRem(14);
     margin-top: ConvertToRem(25);
     min-width: ConvertToRem(200);
@@ -65,18 +49,6 @@
   }
 
   &__link {
-    font-size: ConvertToRem(18);
-    line-height: ConvertToRem(21);
-    letter-spacing: ConvertToRem(0.9);
-    margin-top: ConvertToRem(20);
-    font-weight: 500;
-    a {
-      text-decoration: underline;
-      color: $accent;
-      &:focus,
-      &:visited {
-        color: $accent;
-      }
-    }
+    @include AuthLink();
   }
 }

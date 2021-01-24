@@ -1,8 +1,7 @@
-import { stringify } from '@angular/compiler/src/util';
 import Constants from '../helper/constants';
 
-export class TokenSingleTone {
-  private static instance: TokenSingleTone;
+export class TokenSingleton {
+  private static instance: TokenSingleton;
   private token: string = '';
   private userName: string = '';
   private userId: string = '';
@@ -11,7 +10,7 @@ export class TokenSingleTone {
 
   public static getInstance() {
     if (!this.instance) {
-      this.instance = new TokenSingleTone();
+      this.instance = new TokenSingleton();
       let latestToken = localStorage.getItem(Constants.activeTokenNumber_lsKey);
       if (latestToken != null && latestToken != '') {
         this.instance.token = latestToken;
@@ -21,7 +20,7 @@ export class TokenSingleTone {
         }
         let userName = localStorage.getItem(Constants.username);
         if (userName != null && userName != '') {
-        this.instance.userName = userName?.toString();
+          this.instance.userName = userName?.toString();
         }
       }
     }
@@ -30,6 +29,10 @@ export class TokenSingleTone {
   }
   public setToken(token: string) {
     this.token = token;
+  }
+
+  getToken() {
+    return this.token;
   }
 
   public setUserName(userName: string) {
