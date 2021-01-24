@@ -17,6 +17,7 @@ import { Transactions, Response } from '../interfaces/response.interface';
 })
 export class HomeComponent implements OnInit {
   myReactiveTransaction: FormGroup;
+  transactionDataSource: Transactions[]=[];
   constructor(
     public httpClient: HttpClient,
     private httpService: HttpClientService
@@ -47,23 +48,21 @@ export class HomeComponent implements OnInit {
   lstcomments: any = [];
   lstposts: Transactions[] = [];
   formArray: FormArray;
+  displayedColumns: string[] = [ 'customerName',
+      'mobileNumber',
+      'products',
+      'price',
+      'quantity',
+      'amount',
+      'date'];
+      
+     
 
   ngOnInit() {
-    // this.apiService.getComments().subscribe((data) => {
-    //   this.lstcomments = data;
-    // });
-    // this.apiService.getCommentByParameter().subscribe((data) => {
-    //   this.lstposts = data;
-    // });
-    // this.httpClient.get("src/app/JSON/apiData.json").subscribe(data =>{
-    //   console.log(data);
-    // })
     this.getProducts();
+    
   }
 
-  //onSubmit(form: NgForm) {
-
-  // console.log(form.value.Cust_name);
   onSubmit() {
     //  console.log(form.value.Cust_name);  // Extract Value from form
     const {
@@ -103,36 +102,33 @@ export class HomeComponent implements OnInit {
         isPaid: paid,
       },
     };
-    //   this.apiService.addTransaction(form.value).subscribe((data) => {
-    //       this.lstposts = data;
-    // }
-    // JSON.stringify(req)
+
     console.log(JSON.stringify(req));
-    this.httpService.post('api/Transaction/addTransaction', req).subscribe();
+    this.httpService.post('Transaction/addTransaction', req).subscribe();
     this.getProducts();
   }
 
   getProducts() {
     this.httpService
-      .get('api/Transaction/getTransactions')
+      .get('Transaction/getTransactions')
       .subscribe((data: Response<Transactions[]>) => {
         this.lstposts = data.payload;
+       this.transactionDataSource = this.lstposts;
       });
   }
 
   resetForm(form?: NgForm) {
     if (form != null) form.resetForm();
   }
+            productDetailsFormGroup:FormGroup=new FormGroup({ product: new FormControl('', Validators.required),
+            price: new FormControl('', [Validators.required,Validators.pattern('[0-9]*')]),
+            quantity: new FormControl('', Validators.required),
+            amount: new FormControl('', Validators.required),
+            gst: new FormControl('', Validators.required)});
 
   onAdd() {
     this.formArray.push(
-      new FormGroup({
-        product: new FormControl('', Validators.required),
-        price: new FormControl('', Validators.required),
-        quantity: new FormControl('', Validators.required),
-        amount: new FormControl('', Validators.required),
-        gst: new FormControl('', Validators.required),
-      })
+      this.productDetailsFormGroup
     );
   }
 

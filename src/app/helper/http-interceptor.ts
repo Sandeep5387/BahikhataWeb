@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import {
   HttpInterceptor,
   HttpEvent,
+
+  HttpResponse,
+
   HttpRequest,
   HttpHandler,
   HttpHeaders,
@@ -12,13 +15,15 @@ import { TokenSingleton } from '../config/token-singleton';
 
 @Injectable()
 export class ApplicationHttpInterceptor implements HttpInterceptor {
+
   instance = TokenSingleton.getInstance();
   constructor(private authService: AuthService) {}
-
+  
   intercept(
     httpRequest: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+
     let authReq = httpRequest.clone({
       headers: new HttpHeaders({
         device: '1',
@@ -32,6 +37,7 @@ export class ApplicationHttpInterceptor implements HttpInterceptor {
         }),
       }));
     }
+
     return next.handle(authReq);
   }
 }
