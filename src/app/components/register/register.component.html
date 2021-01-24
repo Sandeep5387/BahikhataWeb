@@ -4,20 +4,20 @@
   <h3 class="register__subheading">Create Your Bahikhata Account</h3>
   <form class="register__form" [formGroup]="registerForm" autocomplete="off" (ngSubmit)="submit()">
     <div class="register__field register__field--extra-width">
-      <mat-form-field class="width-100" appearance="outline" color="accent">
+      <mat-form-field class="width--100" appearance="outline" color="accent">
         <mat-label>Mobile Number</mat-label>
         <input matInput placeholder="+91-XXXXXXXXXX" formControlName="username" />
       </mat-form-field>
     </div>
     <div class="register__group">
       <div class="register__field">
-        <mat-form-field class="width-100" appearance="outline" color="accent">
+        <mat-form-field class="width--100" appearance="outline" color="accent">
           <mat-label>Password</mat-label>
           <input matInput placeholder="XXXXXXXXXX" type="password" formControlName="password" />
         </mat-form-field>
       </div>
       <div class="register__field">
-        <mat-form-field class="width-100" appearance="outline" color="accent">
+        <mat-form-field class="width--100" appearance="outline" color="accent">
           <mat-label>Confirmed Password</mat-label>
           <input matInput placeholder="XXXXXXXXXX" type="password" formControlName="confirmpassword" />
         </mat-form-field>
@@ -30,5 +30,5 @@
       <button type="submit" mat-raised-button color="accent">Register</button>
     </div>
   </form>
-  <p class="register__link">Already a user?&nbsp;<a routerLink="login">Sign In</a></p>
+  <p class="register__link">Already a user?&nbsp;<a routerLink="/">Sign In</a></p>
 </section>
