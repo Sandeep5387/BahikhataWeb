@@ -1,31 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import Constants from 'src/app/helper/constants';
 import { Alert, MessageType } from 'src/app/interfaces/alert.interface';
-import { TokenSingleTone } from 'src/app/interfaces/token-single-tone';
+import { TokenSingleton } from 'src/app/config/token-singleton';
 import { IUser, IUserDetails } from 'src/app/interfaces/user.interface';
 import { AlertService } from 'src/app/service/alert.service';
+import { AuthService } from 'src/app/service/auth.service';
 import { RegisterService } from 'src/app/service/register.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   loginForm!: FormGroup;
+  instance = TokenSingleton.getInstance();
 
   constructor(
     private registerService: RegisterService,
     private formBuilder: FormBuilder,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['7987086837', [Validators.required, Validators.minLength(10)]],
-      password: ['5678@Kush', [Validators.required, Validators.minLength(8)]],
+      username: ['', [Validators.required, Validators.minLength(10)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
@@ -51,39 +55,42 @@ export class LoginComponent implements OnInit {
       });
     }
 
-
     if (alerts.length == 0) {
       let user: IUserDetails = {
         username: this.lf.username.value,
         password: this.lf.password.value,
-        id:"",
-        createdAt:"",
-        lastModified: "",
-        lastLoginTime:"",
-        loginDeviceType: "",
+        id: '',
+        createdAt: '',
+        lastModified: '',
+        lastLoginTime: '',
+        loginDeviceType: '',
       };
       this.registerService.login(user).subscribe((data) => {
-        if ((data.metadata.status == 'SUCCESS' && data.error ==null)) {
-          TokenSingleTone.getInstance().setToken(data.payload.token);
-          TokenSingleTone.getInstance().setUserName(data.payload.userDetails.username);
-          TokenSingleTone.getInstance().setUserId(data.payload.userDetails.id);
-          localStorage.setItem(Constants.activeTokenNumber_lsKey, data.payload.token);
-          localStorage.setItem(Constants.username, data.payload.userDetails.username);
+        if (data.metadata.status == 'SUCCESS' && data.error == null) {
+          this.instance.setToken(data.payload.token);
+          this.instance.setUserName(data.payload.userDetails.username);
+          this.instance.setUserId(data.payload.userDetails.id);
+          localStorage.setItem(
+            Constants.activeTokenNumber_lsKey,
+            data.payload.token
+          );
+          localStorage.setItem(
+            Constants.username,
+            data.payload.userDetails.username
+          );
           localStorage.setItem(Constants.userId, data.payload.userDetails.id);
-          alerts.push({
-            type: MessageType.success,
-            message: "User created successfully.",
-          });
-        }
-        else{
-          data.error.forEach(o=>alerts.push({
-            type: MessageType.error,
-            message: o.message,
-          }));
+          this.authService.updateAuthStatus(true);
+          this.router.navigate(['home']);
+        } else {
+          data.error.forEach((o) =>
+            alerts.push({
+              type: MessageType.error,
+              message: o.message,
+            })
+          );
         }
         this.alertService.showAlert(alerts);
       });
     } else this.alertService.showAlert(alerts);
   }
-
 }
