@@ -1,36 +1,24 @@
-<hr class="register-line" />
-
-<form [formGroup]="loginForm" autocomplete="off" (ngSubmit)="submit()">
-  <div class="register-title">
-    <h3 class="logo">Bahi<span>khata</span></h3>
-  </div>
-  <h2 class="register-header">Login to your bahikhata account</h2>
-
-  <p>
-    <mat-form-field appearance="outline" color="accent" class="username">
-      <mat-label>Mobile Number</mat-label>
-      <input matInput placeholder="+91-XXXXXXXXXX" formControlName="username" />
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="outline" color="accent" class="password">
-      <mat-label>Password</mat-label>
-      <input
-        matInput
-        placeholder="XXXXXXXXXX"
-        type="password"
-        formControlName="password"
-      />
-    </mat-form-field>
-  </p>
-  <section>
-    <div class="example-button-row register-button">
-      <button mat-raised-button color="primary">Login</button>
+<section class="login">
+  <div class="login__hr"></div>
+  <h2 class="login__logo">Bahi<span>khata</span></h2>
+  <h3 class="login__subheading">Create Your Bahikhata Account</h3>
+  <form [formGroup]="loginForm" class="login__form" autocomplete="off" (ngSubmit)="submit()">
+    <div class="login__field">
+      <mat-form-field class="width--100" appearance="outline" color="accent">
+        <mat-label>Mobile Number</mat-label>
+        <input matInput placeholder="+91-XXXXXXXXXX" formControlName="username" />
+      </mat-form-field>
     </div>
-  </section>
+    <div class="login__field">
+      <mat-form-field class="width--100" appearance="outline" color="accent">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="XXXXXXXXXX" type="password" formControlName="password" />
+      </mat-form-field>
+    </div>
 
-  <p>
-    <mat-label  class="already-user">New user?</mat-label>
-    <a class="sign-in" href="" >Register</a>
-  </p>
-</form>
+    <div class="login__submit">
+      <button type="submit" mat-raised-button color="accent">Login</button>
+    </div>
+  </form>
+  <p class="login__link">New user?&nbsp;<a routerLink="../register">Register</a></p>
+</section>

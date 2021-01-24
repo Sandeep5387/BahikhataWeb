@@ -5,9 +5,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
-  { path: '', component: RegisterComponent, pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({

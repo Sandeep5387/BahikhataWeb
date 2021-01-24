@@ -1,6 +1,52 @@
+@import "./variables";
+
 @function ConvertToRem($size) {
   @return #{$size / 16}rem;
 }
 
+@mixin AuthContainer {
+  max-width: ConvertToRem(600);
+  padding-top: ConvertToRem(60);
+  margin-left: auto;
+  margin-right: auto;
+}
 
+@mixin AuthHr {
+  height: ConvertToRem(5);
+  background: linear-gradient(90deg, #087e8b 0%, #1494dc 50%);
+}
 
+@mixin AuthLogo {
+  margin-top: ConvertToRem(36);
+  font-size: ConvertToRem(36);
+  line-height: ConvertToRem(36);
+  font-weight: bold;
+  font-family: $ff-primary;
+  color: $primary;
+  span {
+    color: $accent;
+  }
+}
+
+@mixin AuthSubheading {
+  margin-top: ConvertToRem(22);
+  font-weight: 400;
+  font-size: ConvertToRem(24);
+  line-height: ConvertToRem(28);
+}
+
+@mixin AuthLink {
+  font-size: ConvertToRem(18);
+  line-height: ConvertToRem(21);
+  letter-spacing: ConvertToRem(0.9);
+  margin-top: ConvertToRem(20);
+  font-weight: 500;
+  a {
+    text-decoration: underline;
+    color: $accent;
+    &:focus,
+    &:visited {
+      color: $accent;
+    }
+  }
+}
