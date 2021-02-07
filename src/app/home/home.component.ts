@@ -17,7 +17,7 @@ import { Transactions, Response } from '../interfaces/response.interface';
 })
 export class HomeComponent implements OnInit {
   myReactiveTransaction: FormGroup;
-  transactionDataSource: Transactions[]=[];
+  transactionDataSource: Transactions[] = [];
   constructor(
     public httpClient: HttpClient,
     private httpService: HttpClientService
@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
         Validators.maxLength(10),
         Validators.minLength(10),
       ]),
-      date: new FormControl('', Validators.required),
+      date: new FormControl(new Date(), Validators.required),
       paid: new FormControl(false),
 
       addProductDetailFields: new FormArray([
@@ -48,19 +48,18 @@ export class HomeComponent implements OnInit {
   lstcomments: any = [];
   lstposts: Transactions[] = [];
   formArray: FormArray;
-  displayedColumns: string[] = [ 'customerName',
-      'mobileNumber',
-      'products',
-      'price',
-      'quantity',
-      'amount',
-      'date'];
-      
-     
+  displayedColumns: string[] = [
+    'customerName',
+    'mobileNumber',
+    'products',
+    'price',
+    'quantity',
+    'amount',
+    'date',
+  ];
 
   ngOnInit() {
     this.getProducts();
-    
   }
 
   onSubmit() {
@@ -68,16 +67,29 @@ export class HomeComponent implements OnInit {
     const {
       customerName,
       mobileNumber,
-      product,
-      price,
-      quantity,
-      amount,
-      gst,
       date,
       paid,
     } = this.myReactiveTransaction.value; // Destructuring of properties from object
     console.log(this.myReactiveTransaction.value);
     // loginForm.value.username can be accessed this way also
+    const pdf: any[] = this.formArray.value;
+    const products: any[] = [];
+    pdf.forEach((a) => {
+      const obj = {
+        product: {
+          id: '',
+          price: a.price,
+          gst: a.gst,
+          name: a.product,
+        },
+        amount: a.amount,
+        quantity: a.quantity,
+      };
+      products.push(obj);
+    });
+
+    console.log(this.formArray.value);
+
     const req = {
       // object literal
       payload: {
@@ -86,26 +98,16 @@ export class HomeComponent implements OnInit {
           name: customerName,
           contactNumber: mobileNumber,
         },
-        products: [
-          {
-            product: {
-              id: '',
-              name: product,
-              price: Number(price),
-              gst: Number(gst),
-            },
-            amount: Number(amount),
-            quantity: Number(quantity),
-          },
-        ],
+        products,
         date: date.toISOString(),
         isPaid: paid,
       },
     };
 
     console.log(JSON.stringify(req));
-    this.httpService.post('Transaction/addTransaction', req).subscribe();
-    this.getProducts();
+    this.httpService
+      .post('Transaction/addTransaction', req)
+      .subscribe((data) => this.getProducts());
   }
 
   getProducts() {
@@ -113,23 +115,26 @@ export class HomeComponent implements OnInit {
       .get('Transaction/getTransactions')
       .subscribe((data: Response<Transactions[]>) => {
         this.lstposts = data.payload;
-       this.transactionDataSource = this.lstposts;
+        this.transactionDataSource = this.lstposts;
       });
   }
 
   resetForm(form?: NgForm) {
     if (form != null) form.resetForm();
   }
-            productDetailsFormGroup:FormGroup=new FormGroup({ product: new FormControl('', Validators.required),
-            price: new FormControl('', [Validators.required,Validators.pattern('[0-9]*')]),
-            quantity: new FormControl('', Validators.required),
-            amount: new FormControl('', Validators.required),
-            gst: new FormControl('', Validators.required)});
+  productDetailsFormGroup: FormGroup = new FormGroup({
+    product: new FormControl('', Validators.required),
+    price: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[0-9]*$'),
+    ]),
+    quantity: new FormControl('', Validators.required),
+    amount: new FormControl('', Validators.required),
+    gst: new FormControl('', Validators.required),
+  });
 
   onAdd() {
-    this.formArray.push(
-      this.productDetailsFormGroup
-    );
+    this.formArray.push(this.productDetailsFormGroup);
   }
 
   title = 'BahikhataWeb';
